@@ -1,45 +1,44 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-deployment
+  name: {{ include "mnestix-frontend.fullname" . }}
   labels:
-    app: {{ .Chart.Name }}
+    app: {{ include "mnestix-frontend.name" . }}
+    chart: {{ include "mnestix-frontend.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}
+      app: {{ include "mnestix-frontend.name" . }}
+      release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}
+        app: {{ include "mnestix-frontend.name" . }}
+        release: {{ .Release.Name }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}
+        - name: mnestix-frontend
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: 80
+            - containerPort: 3000
           env:
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
-              value: "{{ $value }}"
+              value: {{ $value | quote }}
             {{- end }}
           volumeMounts:
-            - name: src-volume
+            - name: src
               mountPath: /app/src
-            - name: public-volume
+            - name: public
               mountPath: /app/public
-          resources:
-            requests:
-              memory: "{{ .Values.resources.requests.memory }}"
-              cpu: "{{ .Values.resources.requests.cpu }}"
-            limits:
-              memory: "{{ .Values.resources.limits.memory }}"
-              cpu: "{{ .Values.resources.limits.cpu }}"
       volumes:
-        - name: src-volume
+        - name: src
           hostPath:
-            path: /path/to/host/src
-        - name: public-volume
+            path: /app/src
+        - name: public
           hostPath:
-            path: /path/to/host/public
+            path: /app/public

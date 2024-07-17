@@ -517,3 +517,17 @@ This change aims to prevent server overload and ensure smoother navigation throu
 Right now we are building a community around Mnestix. We would be more than happy to have you onboard, so feel
 free to contact us [mnestix@xitaso.com](mailto:mnestix@xitaso.com).
 
+
+
+# api
+helm lint .
+helm template mnestix-api . -n mtx
+helm install mnestix-api . -n mtx
+helm upgrade --install mnestix-api . -n mtx
+helm delete mnestix-api -n mtx
+
+# frontend
+helm template mnestix-frontend . -n mtx
+helm install mnestix-frontend . -n mtx
+helm upgrade --install mnestix-frontend . -n mtx
+helm delete mnestix-api -n mtx

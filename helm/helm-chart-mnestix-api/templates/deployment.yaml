@@ -1,27 +1,58 @@
+# templates/deployment.yaml
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-deployment
+  name: {{ include "mnestix-api.name" . }}
   labels:
-    app: {{ .Chart.Name }}
+    app: {{ include "mnestix-api.name" . }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}
+      app: {{ include "mnestix-api.name" . }}
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}
+        app: {{ include "mnestix-api.name" . }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}
+        - name: backend-api
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
-            - containerPort: {{ .Values.service.port }}
+            - containerPort: 5064
           env:
-            {{- range $key, $value := .Values.env }}
-            - name: {{ $key }}
-              value: "{{ $value }}"
-            {{- end }}
-      restartPolicy: Always
+            - name: CustomerEndpointsSecurity__ApiKey
+              value: {{ .Values.env.CustomerEndpointsSecurity__ApiKey }}
+            - name: ReverseProxy__Clusters__repoCluster__Destinations__destination1__Address
+              value: {{ .Values.env.ReverseProxy__Clusters__repoCluster__Destinations__destination1__Address }}
+            - name: ReverseProxy__Clusters__discoveryCluster__Destinations__destination1__Address
+              value: {{ .Values.env.ReverseProxy__Clusters__discoveryCluster__Destinations__destination1__Address }}
+            - name: Features__AasRegistryMiddleware
+              value: {{ .Values.env.Features__AasRegistryMiddleware | quote }}
+            - name: Features__UseMongoDbBasedAasIdStorage
+              value: {{ .Values.env.Features__UseMongoDbBasedAasIdStorage | quote }}
+            - name: Features__AllowRetrievingAllShellsAndSubmodels
+              value: {{ .Values.env.Features__AllowRetrievingAllShellsAndSubmodels | quote }}
+            - name: Features__UseAuthentication
+              value: {{ .Values.env.Features__UseAuthentication | quote }}
+            # - name: ReverseProxy__Clusters__influxCluster__Destinations__destination1__Address
+              # value: {{ .Values.env.ReverseProxy__Clusters__influxCluster__Destinations__destination1__Address }}
+            # - name: ReverseProxy__Routes__InfluxRoute__Transforms__1__Set
+              # value: {{ .Values.env.ReverseProxy__Routes__InfluxRoute__Transforms__1__Set }}
+            - name: BasyxDbConnectionConfiguration__MongoConnectionString
+              value: {{ .Values.env.BasyxDbConnectionConfiguration__MongoConnectionString }}
+            - name: BasyxDbConnectionConfiguration__DatabaseName
+              value: {{ .Values.env.BasyxDbConnectionConfiguration__DatabaseName }}
+            - name: BasyxDbConnectionConfiguration__AasCollectionName
+              value: {{ .Values.env.BasyxDbConnectionConfiguration__AasCollectionName }}
+            - name: BasyxDbConnectionConfiguration__LookupServiceCollectionName
+              value: {{ .Values.env.BasyxDbConnectionConfiguration__LookupServiceCollectionName }}
+            - name: AzureAd__Domain
+              value: {{ .Values.env.AzureAd__Domain }}
+            - name: AzureAd__TenantId
+              value: {{ .Values.env.AzureAd__TenantId }}
+            - name: AzureAd__ClientId
+              value: {{ .Values.env.AzureAd__ClientId }}
+            - name: ASPNETCORE_URLS
+              value: {{ .Values.env.ASPNETCORE_URLS }}
