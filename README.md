@@ -9,6 +9,16 @@
 [![Yarn License](https://img.shields.io/badge/YARN-V1.22.22-0d4453?style=flat-square)]()
 [![Join our Community](https://img.shields.io/badge/Join_our_Community-0d4453?style=flat-square)](https://mnestix.io/)
 
+### Quick start (modified Mnestix code for our app)
+
+1. **Install node, yarn, docker, docker compose**
+2. **Set up backend service https://github.com/ME-IIOT/type-aas-gui-backend/tree/frontend-integration**
+3. **Run dev command for latest dev update**
+```
+yarn docker:dev
+```
+
+
 ### Welcome to the Mnestix Community!
 
 Mnestix Browser is an open source software designed to simplify the implementation of the Asset Administration Shell. Together
