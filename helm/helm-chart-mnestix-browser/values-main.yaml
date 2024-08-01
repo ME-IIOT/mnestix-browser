@@ -12,7 +12,7 @@ image:
 
 # Kubernetes Service settings
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 80
 
 # Ingress settings for exposing the service (optional)
