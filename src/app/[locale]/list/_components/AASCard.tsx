@@ -40,6 +40,13 @@ const StyledTypography = styled(Typography)(() => ({
     whiteSpace: 'nowrap',
 }));
 
+const StyledIconButton = styled(IconButton)(({ theme }) => ({
+    backgroundColor: theme.palette.primary.main,
+    '&:hover': {
+        backgroundColor: theme.palette.primary.dark,
+    },
+}));
+
 // AASCard component
 export const AASCard: React.FC<AASCardProps> = ({ aasListEntry, navigateToAas }) => {
     const [productImageUrl, setProductImageUrl] = useState<string | undefined>('');
@@ -60,18 +67,22 @@ export const AASCard: React.FC<AASCardProps> = ({ aasListEntry, navigateToAas })
     return (
         <Grid item xs={12} sm={6} md={4} lg={3} key={aasListEntry.aasId}>
             <Card sx={{ height: '320px', display: 'flex', flexDirection: 'column' }}>
-                <CardMedia sx={{ display: 'flex', justifyContent: 'center' }}>
+                <CardMedia sx={{ display: 'flex', justifyContent: 'center', height: '143px' }}>
                     {productImageUrl ? (
                         <StyledImage src={productImageUrl} alt={aasListEntry.aasId} />
                     ) : (
                         <ShellIcon fontSize="large" color="primary" />
                     )}
                 </CardMedia>
-                <Divider />
+                <Divider
+                    sx={{
+                        borderColor: '#0000004D',
+                    }}
+                />
                 <CardContent
                     sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
                 >
-                    <StyledTypography>{aasListEntry.aasId}</StyledTypography>
+                    <StyledTypography>{aasListEntry.productModel}</StyledTypography>
                     <StyledTypography>{aasListEntry.deviceType}</StyledTypography>
                     <StyledTypography>{aasListEntry.aasVersion}</StyledTypography>
 
@@ -117,14 +128,19 @@ export const AASCard: React.FC<AASCardProps> = ({ aasListEntry, navigateToAas })
                         onChange={handleCheckboxChange(listEntry.aasId)}
                         disabled={checkBoxDisabled(listEntry.aasId)}
                     /> */}
-                    <div>
-                        <IconButton>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            gap: '8px', // Controls the space between buttons
+                        }}
+                    >
+                        <StyledIconButton>
                             <Description />
-                        </IconButton>
-                        <IconButton>
+                        </StyledIconButton>
+                        <StyledIconButton>
                             <Menu />
-                        </IconButton>
-                    </div>
+                        </StyledIconButton>
+                    </Box>
                     <Button size="small" onClick={() => navigateToAas(aasListEntry)}>
                         more detail
                     </Button>

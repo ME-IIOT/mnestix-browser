@@ -1052,10 +1052,11 @@ export class AasListEntry implements IAasListEntry {
     assetId?: string | undefined;
     deviceType?: string | undefined;
     aasVersion?: string | undefined;
+    productModel?: string | undefined;
     // Old  from mnestix api
-    // manufacturerProductDesignation?: { [key: string]: string } | undefined;
-    // manufacturerName?: { [key: string]: string } | undefined;
-    // productGroup?: string | undefined;
+    manufacturerProductDesignation?: { [key: string]: string } | undefined;
+    manufacturerName?: { [key: string]: string } | undefined;
+    productGroup?: string | undefined;
 
     constructor(data?: IAasListEntry) {
         if (data) {
@@ -1072,6 +1073,7 @@ export class AasListEntry implements IAasListEntry {
             this.assetId = _data['assetId'];
             this.deviceType = _data['deviceType'];
             this.aasVersion = _data['aasVersion'];
+            this.productModel = _data['productModel'];
             // if (_data['manufacturerProductDesignation']) {
             //     this.manufacturerProductDesignation = {} as any;
             //     for (let key in _data['manufacturerProductDesignation']) {
