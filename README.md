@@ -281,6 +281,7 @@ To use this just set an environment variable to a link hosted that is publicly a
       THEME_LOGO_URL: https://xitaso.com/wp-content/uploads/XITASO-Logo-quer.svg
 ```
 
+
 #### Using Azure Entra ID
 > **Note:** If the login functionality is going to be used, then apart from setting the authentication flag to `true`, `AD_CLIENT_ID` and `AD_TENANT_ID` should be set by copying `.env.example` to your own `.env` and specifying this sensitive information there.
 
