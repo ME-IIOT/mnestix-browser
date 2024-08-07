@@ -29,11 +29,11 @@ service:
 # Resource requests and limits for the application pods
 resources:
   limits:
-    cpu: '4000m'
-    memory: '16384Mi'
+    cpu: '1000m'
+    memory: '2500Mi'
   requests:
-    cpu: '2000m'
-    memory: '8192Mi'
+    cpu: '900m'
+    memory: '2048Mi'
 
 # Autoscaling settings (optional)
 # autoscaling:
@@ -80,9 +80,9 @@ ingress:
       secretName: tls-secret
 
 env:
-  REGISTRY_API_URL: 'https://aas.my.murrelektronik.de/api/aas-registry'
-  DISCOVERY_API_URL: 'https://aas.my.murrelektronik.de/api/discovery'
-  AAS_REPO_API_URL: 'https://aas.my.murrelektronik.com/api'
+  REGISTRY_API_URL: 'https://aas.my.yacoub.de/api/aas-registry'
+  DISCOVERY_API_URL: 'https://aas.my.yacoub.de/api/discovery'
+  AAS_REPO_API_URL: 'https://aas.my.yacoub.de/api'
   MNESTIX_BACKEND_API_URL: 'https://aasmgmt.aas.my.yacoub.de/'
   AD_CLIENT_ID: ${AD_CLIENT_ID}
   AD_TENANT_ID: ${AD_TENANT_ID}
