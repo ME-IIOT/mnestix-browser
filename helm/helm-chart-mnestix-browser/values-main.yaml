@@ -28,11 +28,11 @@ service:
 # Resource requests and limits for the application pods
 resources:
   limits:
-    cpu: '4000m'
-    memory: '16384Mi'
+    cpu: '1000m'
+    memory: '2500Mi'
   requests:
-    cpu: '2000m'
-    memory: '8192Mi'
+    cpu: '900m'
+    memory: '2048Mi'
 
 # Autoscaling settings (optional)
 # autoscaling:
