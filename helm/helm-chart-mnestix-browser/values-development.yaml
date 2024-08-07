@@ -69,7 +69,7 @@ ingress:
   enabled: true
   ingressClassName: nginx
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: letsencrypt-production
   hosts:
     - host: browser-dev.aas.my.yacoub.de
       paths:
