@@ -69,8 +69,3 @@ jobs:
           --set image.repository=${{ env.REGISTRY_URL }}/${{ env.PROJECT_NAME }} \
           --set image.tag=${{ github.sha }} \
           --debug
-
-      - name: Check pod status
-        run: |
-          kubectl get pods --namespace ${{ env.NAME_SPACE }}
-          kubectl wait --for=condition=Ready pod --all --namespace ${{ env.NAME_SPACE }} --timeout=300s
