@@ -63,7 +63,7 @@ ingress:
   tls:
     - hosts:
         - browser.aas.my.yacoub.de
-      secretName: tls-secret
+      secretName: tls-secret-prod
 
 env:
   REGISTRY_API_URL: 'https://aas.my.murrelektronik.de/api/aas-registry'
