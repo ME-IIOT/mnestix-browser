@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import {
+    useTheme,
     Card,
     Grid,
     CardMedia,
@@ -11,15 +12,10 @@ import {
     IconButton,
     Typography,
     Divider,
-    Chip,
 } from '@mui/material';
-import { Description, Menu, LabelOff } from '@mui/icons-material';
-import { FormattedMessage } from 'react-intl';
+import { Description, Menu, ShoppingCart } from '@mui/icons-material';
 import { AasListEntry } from 'lib/api/generated-api/clients.g';
-import { productClassValue, tooltipText, translateListText } from './AASListView';
 import { ShellIcon } from 'components/custom-icons/ShellIcon';
-import { messages } from 'lib/i18n/localization';
-import { getProductClassId } from 'lib/util/ProductClassResolverUtil';
 import { useApis } from 'components/azureAuthentication/ApiProvider';
 import { useAsyncEffect } from 'lib/hooks/UseAsyncEffect';
 
@@ -45,12 +41,26 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
     '&:hover': {
         backgroundColor: theme.palette.primary.dark,
     },
+    width: '32px',
+    height: '24px',
+    borderRadius: '16px',
 }));
 
 // AASCard component
 export const AASCard: React.FC<AASCardProps> = ({ aasListEntry, navigateToAas }) => {
     const [productImageUrl, setProductImageUrl] = useState<string | undefined>('');
     const { repositoryClient } = useApis();
+    const theme = useTheme();
+
+    const commonIconStyles = {
+        color: 'transparent',
+        stroke: theme.palette.grey[900],
+        strokeWidth: 1,
+        fontSize: 21,
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    };
 
     // Get the image url from aasId, set with thumbnail url if no image is found
     useAsyncEffect(async () => {
@@ -83,37 +93,34 @@ export const AASCard: React.FC<AASCardProps> = ({ aasListEntry, navigateToAas })
                     sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
                 >
                     <StyledTypography>{aasListEntry.productModel}</StyledTypography>
-                    <StyledTypography>{aasListEntry.deviceType}</StyledTypography>
-                    <StyledTypography>{aasListEntry.aasVersion}</StyledTypography>
-
-                    {/* <Typography variant="h6">{tooltipText(listEntry.name, 50)}</Typography>
-                    <Typography variant="body2">{tooltipText(listEntry.manufacturer, 50)}</Typography>
-                    {productClassValue(listEntry.productGroup, 50)} */}
-                    {/* <Typography>
-                        {tooltipText(translateListText(aasListEntry.manufacturerProductDesignation), 100)}
-                    </Typography>
-                    <Typography>{translateListText(aasListEntry.manufacturerName)}</Typography>
-                    <Typography sx={{ letterSpacing: '0.16px' }}>
-                        <FormattedMessage {...messages.mnestix.aasList.assetIdHeading} />
-                        {tooltipText(aasListEntry.assetId, 100)}
-                    </Typography> */}
-                    {/* <Typography sx={{ letterSpacing: '0.16px' }}>
-                        <FormattedMessage {...messages.mnestix.aasList.aasIdHeading} />
-                        {tooltipText(aasListEntry.aasId, 100)}
-                    </Typography> */}
-                    {/* {aasListEntry.productGroup ? (
-                        <Typography>{productClassValue(getProductClassId(aasListEntry.productGroup), 25)}</Typography>
-                    ) : (
-                        <Chip
-                            sx={{ paddingX: '16px', paddingY: '6px' }}
-                            color={'primary'}
-                            label={<FormattedMessage {...messages.mnestix.aasList.notAvailable} />}
-                            variant="outlined"
-                            icon={<LabelOff color={'primary'} />}
-                            data-testid="product-class-chip"
-                        />
-                    )} */}
                 </CardContent>
+                <StyledIconButton
+                    sx={{
+                        width: '28px',
+                        height: '28px',
+                        marginLeft: '21px',
+                        backgroundColor: 'transparent',
+                        color: theme.palette.primary.main,
+                        transition: 'all 0.3s ease', // Smooth transition for hover effect
+                        '&:hover': {
+                            color: theme.palette.primary.main, // Change fill color on hover
+                            backgroundColor: 'transparent',
+                            transform: 'scale(1.2)', // Slightly enlarge the icon
+                        },
+                    }}
+                >
+                    <ShoppingCart
+                        sx={{
+                            color: 'transparent', // Make fill color transparent
+                            stroke: theme.palette.primary.main, // Set stroke color
+                            strokeWidth: 1.5, // Adjust stroke width
+                            fontSize: 21,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}
+                    />
+                </StyledIconButton>
                 <Box
                     sx={{
                         display: 'flex',
@@ -123,11 +130,6 @@ export const AASCard: React.FC<AASCardProps> = ({ aasListEntry, navigateToAas })
                         mt: 'auto',
                     }}
                 >
-                    {/* <Checkbox
-                        checked={isItemSelected(listEntry.aasId)}
-                        onChange={handleCheckboxChange(listEntry.aasId)}
-                        disabled={checkBoxDisabled(listEntry.aasId)}
-                    /> */}
                     <Box
                         sx={{
                             display: 'flex',
@@ -135,10 +137,10 @@ export const AASCard: React.FC<AASCardProps> = ({ aasListEntry, navigateToAas })
                         }}
                     >
                         <StyledIconButton>
-                            <Description />
+                            <Description sx={commonIconStyles} />
                         </StyledIconButton>
                         <StyledIconButton>
-                            <Menu />
+                            <Menu sx={commonIconStyles} />
                         </StyledIconButton>
                     </Box>
                     <Button size="small" onClick={() => navigateToAas(aasListEntry)}>
