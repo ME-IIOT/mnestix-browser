@@ -4,7 +4,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { EnvProvider } from './env/provider';
 
 export const metadata: Metadata = {
-    title: 'Mnestix',
+    title: 'Murrelektronik',
     description: 'AAS made easy',
 };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
