@@ -26,7 +26,8 @@ interface AASCardProps {
 }
 
 const StyledImage = styled('img')(() => ({
-    maxHeight: '160px',
+    marginTop: '10px',
+    maxHeight: '150px',
     borderRadius: '16px',
 }));
 
