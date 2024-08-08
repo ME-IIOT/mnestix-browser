@@ -247,6 +247,8 @@ export function DocumentComponent(props: MarkingsComponentProps) {
             organizationName,
         };
     }
+    console.log('fileviewobject ', fileViewObject);
+    const [imageError, setImageError] = useState(false);
 
     return (
         <DataRow title={props.submodelElement?.idShort} hasDivider={props.hasDivider}>
@@ -255,9 +257,22 @@ export function DocumentComponent(props: MarkingsComponentProps) {
                     <Box display="flex">
                         <Link href={fileViewObject!.url} target="_blank">
                             <StyledImageWrapper>
-                                {fileViewObject!.previewImgUrl ? (
+                                {/* {fileViewObject!.previewImgUrl ? (
                                     <Image src={fileViewObject!.previewImgUrl} height={90} width={90} alt="Document" />
                                 ) : fileViewObject!.mimeType === 'application/pdf' ? (
+                                    <PdfDocumentIcon color="primary" />
+                                ) : (
+                                    <InsertDriveFileOutlined color="primary" />
+                                )} */}
+                                {fileViewObject?.previewImgUrl && !imageError ? (
+                                    <Image
+                                        src={fileViewObject.previewImgUrl}
+                                        height={90}
+                                        width={90}
+                                        alt="Document"
+                                        onError={() => setImageError(true)} // Handle image load error
+                                    />
+                                ) : fileViewObject?.mimeType === 'application/pdf' ? (
                                     <PdfDocumentIcon color="primary" />
                                 ) : (
                                     <InsertDriveFileOutlined color="primary" />
