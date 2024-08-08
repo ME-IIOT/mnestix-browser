@@ -46,6 +46,19 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
     borderRadius: '16px',
 }));
 
+const StyledAasAttributeIcon = styled(IconButton)(({ theme }) => ({
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.text.primary,
+    width: '50px',
+    height: '24px',
+    position: 'absolute',
+    top: '80px',
+    right: '8px',
+    borderRadius: '16px',
+    fontSize: '0.75rem', // Decreased font size
+    textTransform: 'none', // Remove capitalization
+}));
+
 // AASCard component
 export const AASCard: React.FC<AASCardProps> = ({ aasListEntry, navigateToAas }) => {
     const [productImageUrl, setProductImageUrl] = useState<string | undefined>('');
@@ -76,13 +89,19 @@ export const AASCard: React.FC<AASCardProps> = ({ aasListEntry, navigateToAas })
 
     return (
         <Grid item xs={12} sm={6} md={4} lg={3} key={aasListEntry.aasId}>
-            <Card sx={{ height: '320px', display: 'flex', flexDirection: 'column' }}>
+            <Card sx={{ height: '320px', display: 'flex', flexDirection: 'column', position: 'relative' }}>
                 <CardMedia sx={{ display: 'flex', justifyContent: 'center', height: '143px' }}>
                     {productImageUrl ? (
                         <StyledImage src={productImageUrl} alt={aasListEntry.aasId} />
                     ) : (
                         <ShellIcon fontSize="large" color="primary" />
                     )}
+                    <StyledAasAttributeIcon>
+                        <Typography variant="body1">{aasListEntry.aasClass}</Typography>
+                    </StyledAasAttributeIcon>
+                    <StyledAasAttributeIcon sx={{ top: '110px' }}>
+                        <Typography variant="body1">{aasListEntry.aasVersion}</Typography>
+                    </StyledAasAttributeIcon>
                 </CardMedia>
                 <Divider
                     sx={{
