@@ -26,7 +26,8 @@ interface AASCardProps {
 }
 
 const StyledImage = styled('img')(() => ({
-    maxHeight: '143px',
+    maxHeight: '160px',
+    borderRadius: '16px',
 }));
 
 const StyledTypography = styled(Typography)(() => ({
@@ -52,8 +53,8 @@ const StyledAasAttributeIcon = styled(IconButton)(({ theme }) => ({
     width: '50px',
     height: '24px',
     position: 'absolute',
-    top: '80px',
-    right: '8px',
+    top: '100px',
+    right: '16px',
     borderRadius: '16px',
     fontSize: '0.75rem', // Decreased font size
     textTransform: 'none', // Remove capitalization
@@ -89,8 +90,8 @@ export const AASCard: React.FC<AASCardProps> = ({ aasListEntry, navigateToAas })
 
     return (
         <Grid item xs={12} sm={6} md={4} lg={3} key={aasListEntry.aasId}>
-            <Card sx={{ height: '320px', display: 'flex', flexDirection: 'column', position: 'relative' }}>
-                <CardMedia sx={{ display: 'flex', justifyContent: 'center', height: '143px' }}>
+            <Card sx={{ height: '400px', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+                <CardMedia sx={{ display: 'flex', justifyContent: 'center', height: '160px' }}>
                     {productImageUrl ? (
                         <StyledImage src={productImageUrl} alt={aasListEntry.aasId} />
                     ) : (
@@ -99,15 +100,10 @@ export const AASCard: React.FC<AASCardProps> = ({ aasListEntry, navigateToAas })
                     <StyledAasAttributeIcon>
                         <Typography variant="body1">{aasListEntry.aasClass}</Typography>
                     </StyledAasAttributeIcon>
-                    <StyledAasAttributeIcon sx={{ top: '110px' }}>
+                    <StyledAasAttributeIcon sx={{ top: '128px' }}>
                         <Typography variant="body1">{aasListEntry.aasVersion}</Typography>
                     </StyledAasAttributeIcon>
                 </CardMedia>
-                <Divider
-                    sx={{
-                        borderColor: '#0000004D',
-                    }}
-                />
                 <CardContent
                     sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
                 >
