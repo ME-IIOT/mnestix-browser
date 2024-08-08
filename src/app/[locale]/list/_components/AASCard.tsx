@@ -57,8 +57,12 @@ const StyledAasAttributeIcon = styled(IconButton)(({ theme }) => ({
     top: '100px',
     right: '16px',
     borderRadius: '16px',
-    fontSize: '0.75rem', // Decreased font size
-    textTransform: 'none', // Remove capitalization
+    '&:hover': {
+        backgroundColor: theme.palette.background.paper,
+    },
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
 }));
 
 // AASCard component
