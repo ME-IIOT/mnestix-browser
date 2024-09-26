@@ -3,8 +3,8 @@ name: Build and deploy to Azure Kubernetes Service
 env:
   AZURE_CONTAINER_REGISTRY: cryacoubcp.azurecr.io # set this to the name of your container registry
   PROJECT_NAME: mnestix-browser # set this to your project's name
-  RESOURCE_GROUP: rg-yacoub-cp-iiot # set this to the resource group containing your AKS cluster
-  CLUSTER_NAME: aks-yacoub-cp-iiot # set this to the name of your AKS cluster
+  RESOURCE_GROUP: rg-yacoub-cp-dev # set this to the resource group containing your AKS cluster
+  CLUSTER_NAME: aks-yacoub-cp-dev # set this to the name of your AKS cluster
   REGISTRY_URL: cryacoubcp.azurecr.io # set this to the URL of your registry
   # If you bake using helm:
   CHART_PATH: helm/helm-chart-mnestix-browser # set this to the path to your helm file
