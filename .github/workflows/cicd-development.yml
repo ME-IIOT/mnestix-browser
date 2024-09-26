@@ -37,7 +37,6 @@ jobs:
         uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-          enable-AzPSSession: true # ensures that the Azure CLI persists the session correctly for all subsequent az commands.
 
       # Ensure login successful
       - name: Verify Azure Login
